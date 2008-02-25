@@ -57,7 +57,7 @@ Static files for libggigcp library.
 %build
 export echo=echo
 
-%configure2_5x
+%configure2_5x --enable-static
 
 %make
 
@@ -104,4 +104,3 @@ chrpath -d %{buildroot}%{_libdir}/ggi/gcp/default/color_gcp.so
 %files -n %{staticname}
 %defattr(-,root,root)
 %{_libdir}/*.a
-%{_libdir}/ggi/gcp/default/*.a
