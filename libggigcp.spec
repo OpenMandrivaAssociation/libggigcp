@@ -6,7 +6,7 @@
 Summary:	Extension to libggi for advanced color and palette handling
 Name:		libggigcp
 Version:	1.0.2
-Release:	%mkrel 6
+Release:	%mkrel 7
 License:	Public Domain
 Group:		System/Libraries
 Url:		http://www.ggi-project.org/
@@ -44,7 +44,7 @@ Header files for libggigcp library.
 %package -n %{staticname}
 Summary:	Static files for libggigcp library
 Group:		Development/C
-Requires:	%{libname}-devel = %{version}-%{release}
+Requires:	%{develname} = %{version}-%{release}
 Obsoletes:	%mklibname ggigcp 1 -d -s
 
 %description -n %{staticname}
