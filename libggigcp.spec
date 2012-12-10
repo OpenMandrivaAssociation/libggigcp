@@ -6,7 +6,7 @@
 Summary:	Extension to libggi for advanced color and palette handling
 Name:		libggigcp
 Version:	1.0.2
-Release:	%mkrel 8
+Release:	9
 License:	Public Domain
 Group:		System/Libraries
 Url:		http://www.ggi-project.org/
@@ -16,7 +16,6 @@ BuildRequires:	libggi-devel	>= 2.2.2
 BuildRequires:	chrpath
 %endif
 Requires:	%{libname} = %{version}-%{release}
-BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 It adds features for conversion between different color 
@@ -35,7 +34,7 @@ Main library for libggigcp.
 Summary:	Header files for libggigcp library
 Group:		Development/C
 Requires:	%{libname} = %{version}-%{release}
-Provides:	%{name}-devel = %{version}-%{release}
+Provides:	%{name}-devel = %{EVRD}
 Obsoletes:	%mklibname ggigcp 1 -d
 
 %description -n %{develname}
@@ -70,40 +69,66 @@ export echo=echo
 chrpath -d %{buildroot}%{_libdir}/ggi/gcp/default/color_gcp.so
 %endif
 
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
-%clean
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
-
 %files
-%defattr(-,root,root)
 %doc README ChangeLog
 %dir %{_libdir}/ggi/gcp
 %dir %{_libdir}/ggi/gcp/default
 %config(noreplace) %{_sysconfdir}/ggi/libggigcp.conf
-%{_libdir}/ggi/gcp/default/*.la
 %{_libdir}/ggi/gcp/default/*.so
 %{_mandir}/man3/*
 
 %files -n %{libname}
-%defattr(-,root,root)
 %{_libdir}/*.so.%{major}*
 
 %files -n %{develname}
-%defattr(-,root,root)
 %doc doc/*.txt doc/*.faq
 %{_includedir}/ggi/*.h
 %{_includedir}/ggi/internal/*.h
 %{_libdir}/*.so
-%{_libdir}/*.la
 %{_mandir}/man7/*
 
 %files -n %{staticname}
-%defattr(-,root,root)
 %{_libdir}/*.a
+
+
+%changelog
+* Fri Dec 10 2010 Oden Eriksson <oeriksson@mandriva.com> 1.0.2-8mdv2011.0
++ Revision: 620123
+- the mass rebuild of 2010.0 packages
+
+* Sun Aug 02 2009 Funda Wang <fwang@mandriva.org> 1.0.2-7mdv2010.0
++ Revision: 407503
+- fix requires
+
+* Wed Mar 25 2009 Frederic Crozat <fcrozat@mandriva.com> 1.0.2-6mdv2009.1
++ Revision: 361069
+- Fix build
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - rebuild
+
+  + Pixel <pixel@mandriva.com>
+    - do not call ldconfig in %%post/%%postun, it is now handled by filetriggers
+
+* Mon Feb 25 2008 Tomasz Pawel Gajc <tpg@mandriva.org> 1.0.2-3mdv2008.1
++ Revision: 174779
+- new devel library policy
+- spec file clean
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill re-definition of %%buildroot on Pixel's request
+
+
+* Fri Feb 23 2007 Tomasz Pawel Gajc <tpg@mandriva.org> 1.0.2-2mdv2007.0
++ Revision: 125203
+- fix dependencies
+
+* Fri Feb 23 2007 Tomasz Pawel Gajc <tpg@mandriva.org> 1.0.2-1mdv2007.1
++ Revision: 125109
+- make it work
+- remove rpath
+- Import libggigcp
+
