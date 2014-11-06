@@ -6,7 +6,7 @@
 Summary:	Extension to libggi for advanced color and palette handling
 Name:		libggigcp
 Version:	1.0.2
-Release:	9
+Release:	10
 License:	Public Domain
 Group:		System/Libraries
 Url:		http://www.ggi-project.org/
@@ -55,12 +55,11 @@ Static files for libggigcp library.
 %build
 export echo=echo
 
-%configure2_5x --enable-static
+%configure --enable-static
 
 %make
 
 %install
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
 export echo=echo
 
 %makeinstall_std
@@ -89,46 +88,3 @@ chrpath -d %{buildroot}%{_libdir}/ggi/gcp/default/color_gcp.so
 
 %files -n %{staticname}
 %{_libdir}/*.a
-
-
-%changelog
-* Fri Dec 10 2010 Oden Eriksson <oeriksson@mandriva.com> 1.0.2-8mdv2011.0
-+ Revision: 620123
-- the mass rebuild of 2010.0 packages
-
-* Sun Aug 02 2009 Funda Wang <fwang@mandriva.org> 1.0.2-7mdv2010.0
-+ Revision: 407503
-- fix requires
-
-* Wed Mar 25 2009 Frederic Crozat <fcrozat@mandriva.com> 1.0.2-6mdv2009.1
-+ Revision: 361069
-- Fix build
-
-  + Thierry Vignaud <tv@mandriva.org>
-    - rebuild
-
-  + Pixel <pixel@mandriva.com>
-    - do not call ldconfig in %%post/%%postun, it is now handled by filetriggers
-
-* Mon Feb 25 2008 Tomasz Pawel Gajc <tpg@mandriva.org> 1.0.2-3mdv2008.1
-+ Revision: 174779
-- new devel library policy
-- spec file clean
-
-  + Olivier Blin <oblin@mandriva.com>
-    - restore BuildRoot
-
-  + Thierry Vignaud <tv@mandriva.org>
-    - kill re-definition of %%buildroot on Pixel's request
-
-
-* Fri Feb 23 2007 Tomasz Pawel Gajc <tpg@mandriva.org> 1.0.2-2mdv2007.0
-+ Revision: 125203
-- fix dependencies
-
-* Fri Feb 23 2007 Tomasz Pawel Gajc <tpg@mandriva.org> 1.0.2-1mdv2007.1
-+ Revision: 125109
-- make it work
-- remove rpath
-- Import libggigcp
-
